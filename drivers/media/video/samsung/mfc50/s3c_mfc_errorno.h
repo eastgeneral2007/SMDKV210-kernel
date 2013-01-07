@@ -1,0 +1,57 @@
+/*
+ * drivers/media/video/samsung/mfc50/s3c_mfc_errorno.h
+ *
+ * Header file for Samsung MFC (Multi Function Codec - FIMV) driver
+ *
+ * Jaeryul Oh, Copyright (c) 2009 Samsung Electronics
+ * http://www.samsungsemi.com/
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+
+#ifndef _S3C_MFC_ERRORNO_H_
+#define _S3C_MFC_ERRORNO_H_
+
+typedef enum {
+	MFC_RET_OK = 1,
+	MFC_RET_FAIL = -1000,
+	MFC_RET_OPEN_FAIL = -1001,
+	MFC_RET_CLOSE_FAIL = -1002,
+	MFC_RET_DEC_INIT_FAIL = -2000,
+	MFC_RET_DEC_EXE_TIME_OUT = -2001,
+	MFC_RET_DEC_EXE_ERR = -2002,
+	MFC_RET_DEC_GET_INBUF_FAIL = 2003,
+	MFC_RET_DEC_SET_INBUF_FAIL = 2004,
+	MFC_RET_DEC_GET_OUTBUF_FAIL = -2005,
+	MFC_RET_DEC_GET_CONF_FAIL = -2006,
+	MFC_RET_DEC_SET_CONF_FAIL = -2007,
+	MFC_RET_ENC_INIT_FAIL = -3000,
+	MFC_RET_ENC_EXE_TIME_OUT = -3001,
+	MFC_RET_ENC_EXE_ERR = -3002,
+	MFC_RET_ENC_GET_INBUF_FAIL = -3003,
+	MFC_RET_ENC_SET_INBUF_FAIL = -3004,
+	MFC_RET_ENC_GET_OUTBUF_FAIL = -3005,
+	MFC_RET_ENC_SET_OUTBUF_FAIL = -3006,
+	MFC_RET_ENC_GET_CONF_FAIL = -3007,
+	MFC_RET_ENC_SET_CONF_FAIL = -3008,
+	MFC_RET_STATE_INVALID = -4000,
+	MFC_RET_DEC_HEADER_FAIL = -4001,
+	MFC_RET_DEC_INIT_BUF_FAIL = -4002,
+	MFC_RET_ENC_HEADER_FAIL = -5000,
+	MFC_RET_ENC_PARAM_FAIL = -5001,
+	MFC_RET_FRM_BUF_SIZE_FAIL = -6000,
+	MFC_RET_FW_LOAD_FAIL = -6001,
+	MFC_RET_FW_INIT_FAIL = -6002,
+	MFC_RET_INST_NUM_EXCEEDED_FAIL = -6003,
+	MFC_RET_MEM_ALLOC_FAIL = -6004,
+	MFC_RET_MEM_INVALID_ADDR_FAIL = -6005,
+	MFC_RET_MEM_MAPPING_FAIL = -6006,
+	MFC_RET_GET_CONF_FAIL = -6007,
+	MFC_RET_SET_CONF_FAIL = -6008,
+	MFC_RET_INVALID_PARAM_FAIL = -6009,
+	MFC_RET_API_FAIL = -9000
+} SSBSIP_MFC_ERROR_CODE;
+
+#endif /* _S3C_MFC_ERRORNO_H_ */

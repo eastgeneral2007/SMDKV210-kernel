@@ -1,0 +1,173 @@
+# arch/arm/plat-s5pv2xx/Kconfig
+#
+# Copyright 2008 Openmoko, Inc.
+# Copyright 2008 Simtec Electronics
+#	Ben Dooks <ben@simtec.co.uk>
+#
+# Licensed under GPLv2
+
+config PLAT_S5PV2XX
+	bool
+	depends on ARCH_S5PV2XX
+	select CPU_V7
+	select PLAT_S3C
+	select ARM_VIC
+	default y
+	select NO_IOPORT
+	select ARCH_REQUIRE_GPIOLIB
+	select S3C_GPIO_TRACK
+	select S3C_GPIO_PULL_UPDOWN
+	select S3C_GPIO_CFG_S5PC1XX
+	select DMABOUNCE
+	help
+	  Base platform code for any Samsung S5PV2XX device
+
+
+if PLAT_S5PV2XX
+# Configuration options shared by all S5PV2XX implementations
+
+config CPU_S5PV210_INIT
+	bool
+	depends on CPU_S5PV210
+	default y	
+	help
+	  Common initialisation code for the S5PC100 that is shared
+	  by other CPUs in the series, such as the S5PV210.
+
+config CPU_S5PV210_CLOCK
+	bool
+	depends on CPU_S5PV210
+	default y	
+	help
+	  Common clock support code for the S5PC100 that is shared
+	  by other CPUs in the series, such as the S5PV210.
+
+# platform specific device setup
+
+config S5PV2XX_SETUP_I2C0
+	bool
+	default y
+	help
+	  Common setup code for i2c bus 0.
+
+	  Note, currently since i2c0 is always compiled, this setup helper
+	  is always compiled with it.
+
+config S5PV2XX_SETUP_I2C1
+	bool
+	default y
+	help
+	  Common setup code for i2c bus 1.
+
+config S5PV2XX_SETUP_I2C2
+	bool
+	default y
+	help
+	  Common setup code for i2c bus 2.
+
+config S5PV2XX_ADC
+        bool "S5PV2XX_ ADC Driver"
+        depends on PLAT_S5PV2XX
+        help
+          ADC (A/D Conversion) driver for Samsung S5PV2XX.
+
+# MIPI-CSIS part
+config S5PV2XX_DEV_CSIS
+	bool
+	default y
+	help
+	  Compile in platform device definitions for MIPI-CSIS
+
+config S5PV2XX_SETUP_CSIS
+	bool
+	default y
+	help
+	  Common setup code for MIPI-CSIS
+
+# IPC part
+config S5PV2XX_DEV_IPC
+	bool
+	default y
+	help
+	  Compile in platform device definitions for IPC
+
+# FIMC part
+config S5PV2XX_DEV_FIMC0
+	bool
+	default y
+	help
+	  Compile in platform device definitions for FIMC controller 0
+
+config S5PV2XX_DEV_FIMC1
+	bool
+	default y
+	help
+	  Compile in platform device definitions for FIMC controller 1
+
+config S5PV2XX_DEV_FIMC2
+	bool
+	default y
+	help
+	  Compile in platform device definitions for FIMC controller 2
+
+config S5PV2XX_SETUP_FIMC0
+	bool
+	default y
+	help
+	  Common setup code for FIMC controller 0.
+
+config S5PV2XX_SETUP_FIMC1
+	bool
+	default y
+	help
+	  Common setup code for FIMC controller 1.
+
+config S5PV2XX_SETUP_FIMC2
+	bool
+	default y
+	help
+	  Common setup code for FIMC controller 2.
+
+# MFC part
+config S5PV2XX_DEV_MFC
+	bool
+	default y
+	help
+	  Compile in platform device definitions for MFC
+
+config S5PV2XX_SETUP_MFC
+	bool
+	default y
+	help
+	  Common setup code for MFC
+
+# FB part
+config S5PV2XX_DEV_FB
+	bool
+	depends on FB_S3C
+	default y
+	help
+	  Compile in platform device definitions for FIMD controller
+
+config S5PV2XX_SETUP_FB
+	bool
+	depends on FB_S3C
+	default y
+	help
+	  Common setup code for FIMD controller.
+
+config S5P_HAVE_PWM
+        bool "PWM device support"
+        select HAVE_PWM
+        help
+           Support for exporting the PWM timer blocks via the pwm device
+
+config S5P_TICKLESS_IDLE
+	bool "Enabling tickless idle and HRT on S5PV210"
+	select GENERIC_TIME
+	select GENERIC_CLOCKEVENTS 
+	select NO_HZ 
+	default n
+	help
+	  Support tickless idle and HRT through pwm timer
+endif

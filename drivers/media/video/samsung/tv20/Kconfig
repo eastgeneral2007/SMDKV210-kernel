@@ -1,0 +1,26 @@
+#
+# Configuration for Post Porcessor
+#
+
+config VIDEO_TV20
+	bool "Samsung TV Driver"
+	depends on VIDEO_SAMSUNG
+	default n
+	---help---
+	  This is a TV driver for Samsung AP
+
+config HDMI_CEC
+	bool "HDMI CEC driver support."
+	depends on VIDEO_TV20 && CPU_S5PV210
+	default y
+	---help---
+	  This is a HDMI CEC driver for Samsung AP
+	  Check dev node (major 10, minor 242)
+
+config HDMI_HPD
+	bool "HDMI HPD driver support."
+	depends on VIDEO_TV20 && CPU_S5PV210
+	default y
+	---help---
+	  This is a HDMI HPD driver for Samsung AP
+	  Check dev node (major 10, minor 243)

@@ -1,0 +1,126 @@
+# arch/arm/mach-s5pv210/Kconfig
+#
+# Copyright 2008 Openmoko, Inc.
+# Copyright 2008 Simtec Electronics
+#
+# Licensed under GPLv2
+
+# Configuration options for the S5PV210 CPU
+
+config CPU_S5PV210
+	bool
+	select CPU_S5PV210_INIT
+	select CPU_S5PV210_CLOCK
+	select S5PV210_PM if PM
+	help
+		Enable S5PV210 CPU support
+
+config S5PV2XX_SETUP_SDHCI
+	bool
+	help
+		Internal helper functions for S5PC1XX based SDHCI systems
+
+config MACH_SMDKV210
+	bool "SMDKV210"
+	select CPU_S5PV210
+	select S3C_DMA_PL330
+	select S3C_DEV_I2C1
+	select S3C_DEV_HSMMC
+	select S3C_DEV_I2C2
+	select S3C_DEV_HSMMC1 if !SMDKV210_SD_CH0_8BIT
+	select S3C_DEV_HSMMC2
+	select S3C_DEV_HSMMC3 if !SMDKV210_SD_CH2_8BIT       
+	select S5PV2XX_SETUP_SDHCI
+	select S3C64XX_SETUP_I2C1
+	help
+	  Machine support for the Samsung SMDKV210
+
+choice
+	prompt "Setup CPU Type for S5PV210"
+	depends on PLAT_S5PV2XX
+	default S5PV210_H_TYPE
+
+config S5PV210_H_TYPE
+	bool "Select H-Type"
+	select ARCH_DISCONTIGMEM_ENABLE
+	depends on PLAT_S5PV2XX
+	help
+		Select H-Type of S5PV210
+
+config S5PV210_AC_TYPE
+	bool "select AC-Type"
+	select ARCH_DISCONTIGMEM_ENABLE
+	depends on PLAT_S5PV2XX
+	help
+		Select AC-Type of S5PV210
+
+config S5PV210_SINGLE_TYPE
+	bool "select SINGLE-Type"
+	select ARCH_FLATMEM_HAS_HOLES
+	depends on PLAT_S5PV2XX
+	help
+		Select SINGLE-Type of S5PV210
+
+endchoice
+
+	comment "MMC/SD slot setup"
+	depends on MACH_SMDKV210	
+
+config SMDKV210_SD_CH0_8BIT
+	bool "Use 8-bit bus with channel 0"
+	depends on MACH_SMDKV210
+	default n
+	help
+		IF channel 0 uses 8-bit bus, channel 1 shoule be disabled.
+       
+config SMDKV210_SD_CH2_8BIT
+	bool "Use 8-bit bus with channel 2"
+	depends on MACH_SMDKV210
+	default n	
+	help
+		IF channel 2 uses 8-bit bus, channel 3 shoule be disabled.
+
+config DM9000_16BIT
+	bool "Use 16-bit bus for DM9000 ethernet controller"
+	depends on MACH_SMDKV210
+	default n
+	help
+		Some SMDKV210 board have 16bit data bus for DM9000 ethernet controller..
+
+config S5PV210_PM
+	bool
+	help
+		Power Management code common to S5PV210
+
+choice
+	prompt "CPU revision"
+	depends on CPU_S5PV210
+	default CPU_S5PV210_EVT1
+
+config CPU_S5PV210_EVT0
+	bool "EVT0"
+	help
+		Only for EVT0 version
+
+config CPU_S5PV210_EVT1
+	bool "EVT1"
+	help
+		Only for EVT1 version
+endchoice
+
+choice
+	prompt "Select RESET type on S5PV210"
+	depends on CPU_S5PV210
+	default USE_WDT_RESET
+
+config USE_WDT_RESET
+	bool "Using watchdog"
+	help
+		Use WDT to support reset
+
+config USE_SW_RESET
+	bool "Using SWRESET"
+	help
+		Use SWRESET to support reset
+
+endchoice
