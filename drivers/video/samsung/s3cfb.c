@@ -34,7 +34,10 @@
 #include <plat/cpu-freq.h>
 
 #ifdef CONFIG_FB_S3C_LTE480WV
-#include "logo_rgb24_wvga_landscape.h"
+// maliyu modify start
+//#include "logo_rgb24_wvga_landscape.h"
+#include "dragon_bmp.h"
+// maliyu modify end
 #endif
 
 #ifdef CONFIG_FB_S3C_TL2796
